@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    background-color: var(--bg-focus, #0f172a);
+    transition: background-color 0.6s ease;
+  }
+
+  html[data-phase="shortBreak"] {
+    background-color: var(--bg-short-break, #064e3b);
+  }
+
+  html[data-phase="longBreak"] {
+    background-color: var(--bg-long-break, #134e4a);
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    width: 100%;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.25);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: none;
+  }
+}
+
+[data-theme="zen"] {
+  --bg-focus: #0f172a;
+  --bg-short-break: #064e3b;
+  --bg-long-break: #134e4a;
+}
+
+[data-theme="ocean"] {
+  --bg-focus: #172554;
+  --bg-short-break: #1e3a5f;
+  --bg-long-break: #164e63;
+}
+
+[data-theme="sunset"] {
+  --bg-focus: #431407;
+  --bg-short-break: #881337;
+  --bg-long-break: #78350f;
+}
+
+[data-theme="forest"] {
+  --bg-focus: #052e16;
+  --bg-short-break: #1a2e05;
+  --bg-long-break: #064e3b;
+}
+
+[data-theme="midnight"] {
+  --bg-focus: #1e1b4b;
+  --bg-short-break: #2e1065;
+  --bg-long-break: #312e81;
+}
