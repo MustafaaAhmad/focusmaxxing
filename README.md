@@ -1,6 +1,6 @@
 # focusmaxxing
 
-A static pomodoro timer built with React 19, Tailwind CSS v4, and Vite 6.
+A static focusmaxxing timer built with React 19, Tailwind CSS v4, and Vite 6.
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ Each phase auto-starts when the previous one ends. The alarm triggers on every p
 
 ### Settings
 
-Settings are persisted to `localStorage` under the key `pomodoro-settings`. The provider (`SettingsContext`) exposes three operations:
+Settings are persisted to `localStorage` under the key `focusmaxxing-settings`. The provider (`SettingsContext`) exposes three operations:
 
 - `updateSettings(partial)` — update individual values, switches preset to `custom`
 - `applyPreset(id)` — loads a named preset (standard / caveman / monk)

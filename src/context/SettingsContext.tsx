@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useCallback, useEffect, type React
 import type { Settings, PresetId, ThemeId } from '../types'
 import { PRESETS } from '../constants'
 
-const STORAGE_KEY = 'pomodoro-settings'
+const STORAGE_KEY = 'focusmaxxing-settings'
 
 const DEFAULT_SETTINGS: Settings = {
   presetId: 'standard',
