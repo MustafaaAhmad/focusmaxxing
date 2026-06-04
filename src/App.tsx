@@ -6,10 +6,20 @@ import { Controls } from './components/Controls'
 import { PhaseLabel } from './components/PhaseLabel'
 import { SettingsIcon } from './components/SettingsIcon'
 import { SettingsModal } from './components/SettingsModal'
+import { OnboardingNote } from './components/OnboardingNote'
 
 export default function App() {
   const { settings, phaseLabels } = useSettings()
   const [showSettings, setShowSettings] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(() => {
+    return !localStorage.getItem('focusmaxxing-onboarding')
+  })
+
+  useEffect(() => {
+    if (!showOnboarding) {
+      localStorage.setItem('focusmaxxing-onboarding', '1')
+    }
+  }, [showOnboarding])
 
   const {
     timeRemaining,
@@ -41,6 +51,7 @@ export default function App() {
 
   return (
     <>
+      {showOnboarding && <OnboardingNote onDismiss={() => setShowOnboarding(false)} />}
       <div className="min-h-screen flex flex-col items-center justify-center relative px-4">
         <SettingsIcon onClick={() => setShowSettings(true)} />
         <PhaseLabel
