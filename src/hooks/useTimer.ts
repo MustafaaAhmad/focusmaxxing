@@ -40,6 +40,15 @@ export function useTimer({
   useEffect(() => { sessionsRef.current = completedSessions }, [completedSessions])
 
   useEffect(() => {
+    const p = phaseRef.current
+    const mins = p === 'focus' ? focusDuration
+      : p === 'shortBreak' ? shortBreakDuration
+      : longBreakDuration
+    setTimeRemaining(mins * 60)
+    setIsRunning(false)
+  }, [focusDuration, shortBreakDuration, longBreakDuration])
+
+  useEffect(() => {
     if (!isRunning) return
     const id = setInterval(() => {
       setTimeRemaining(prev => Math.max(0, prev - 1))
