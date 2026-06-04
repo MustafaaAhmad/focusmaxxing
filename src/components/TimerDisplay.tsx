@@ -12,7 +12,7 @@ export function TimerDisplay({ timeRemaining, phase }: TimerDisplayProps) {
 
   return (
     <div className="text-center my-16 select-none">
-      <div className="text-[8rem] sm:text-[10rem] md:text-[12rem] font-bold text-white tracking-tight leading-none tabular-nums">
+      <div className="text-[8rem] sm:text-[10rem] md:text-[12rem] font-bold text-[var(--text-primary)] tracking-tight leading-none tabular-nums">
         {display}
       </div>
     </div>

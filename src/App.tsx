@@ -8,7 +8,7 @@ import { SettingsIcon } from './components/SettingsIcon'
 import { SettingsModal } from './components/SettingsModal'
 
 export default function App() {
-  const { settings } = useSettings()
+  const { settings, phaseLabels } = useSettings()
   const [showSettings, setShowSettings] = useState(false)
 
   const {
@@ -24,6 +24,7 @@ export default function App() {
     shortBreakDuration: settings.shortBreakDuration,
     longBreakDuration: settings.longBreakDuration,
     shortBreaksBeforeLong: settings.shortBreaksBeforeLong,
+    phaseLabels,
   })
 
   useEffect(() => {
@@ -34,12 +35,17 @@ export default function App() {
     document.documentElement.dataset.theme = settings.themeId
   }, [settings.themeId])
 
+  useEffect(() => {
+    document.documentElement.dataset.mode = settings.mode
+  }, [settings.mode])
+
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center relative px-4">
         <SettingsIcon onClick={() => setShowSettings(true)} />
         <PhaseLabel
           phase={phase}
+          phaseLabels={phaseLabels}
           completedSessions={completedSessions}
           shortBreaksBeforeLong={settings.shortBreaksBeforeLong}
         />

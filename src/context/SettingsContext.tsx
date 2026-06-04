@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
-import type { Settings, PresetId, ThemeId } from '../types'
+import { createContext, useContext, useState, useCallback, useEffect, useMemo, type ReactNode } from 'react'
+import type { Settings, PresetId, ThemeId, Mode, Phase } from '../types'
 import { PRESETS } from '../constants'
 
 const STORAGE_KEY = 'focusmaxxing-settings'
@@ -11,6 +11,7 @@ const DEFAULT_SETTINGS: Settings = {
   longBreakDuration: 15,
   shortBreaksBeforeLong: 3,
   themeId: 'zen',
+  mode: 'dark',
 }
 
 function loadSettings(): Settings {
@@ -28,9 +29,11 @@ function loadSettings(): Settings {
 
 interface SettingsContextType {
   settings: Settings
+  phaseLabels: Record<Phase, string>
   updateSettings: (partial: Partial<Settings>) => void
   applyPreset: (id: PresetId) => void
   setTheme: (id: ThemeId) => void
+  setMode: (mode: Mode) => void
 }
 
 const SettingsContext = createContext<SettingsContextType | null>(null)
@@ -41,6 +44,14 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
   }, [settings])
+
+  const phaseLabels = useMemo(() => {
+    if (settings.presetId === 'custom') {
+      return PRESETS[0].labels
+    }
+    const preset = PRESETS.find(p => p.id === settings.presetId)
+    return preset?.labels ?? PRESETS[0].labels
+  }, [settings.presetId])
 
   const updateSettings = useCallback((partial: Partial<Settings>) => {
     setSettings(prev => ({ ...prev, ...partial, presetId: 'custom' }))
@@ -56,6 +67,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         shortBreakDuration: preset.shortBreakDuration,
         longBreakDuration: preset.longBreakDuration,
         shortBreaksBeforeLong: preset.shortBreaksBeforeLong,
+        ...(preset.themeId ? { themeId: preset.themeId } : {}),
       }))
     }
   }, [])
@@ -64,8 +76,12 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     setSettings(prev => ({ ...prev, themeId: id }))
   }, [])
 
+  const setMode = useCallback((mode: Mode) => {
+    setSettings(prev => ({ ...prev, mode }))
+  }, [])
+
   return (
-    <SettingsContext.Provider value={{ settings, updateSettings, applyPreset, setTheme }}>
+    <SettingsContext.Provider value={{ settings, phaseLabels, updateSettings, applyPreset, setTheme, setMode }}>
       {children}
     </SettingsContext.Provider>
   )
