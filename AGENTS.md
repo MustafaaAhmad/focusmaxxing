@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-A static pomodoro timer site. React 19 + Tailwind CSS v4 + Vite 6 + TypeScript (strict).
+A static focusmaxxing timer site. React 19 + Tailwind CSS v4 + Vite 6 + TypeScript (strict).
 
 ## Tech Stack
 
@@ -64,7 +64,7 @@ src/
 - Resetting keeps the current phase but resets its timer
 
 ### Settings Context (context/SettingsContext.tsx)
-- Persists to `localStorage` key `pomodoro-settings`
+- Persists to `localStorage` key `focusmaxxing-settings`
 - `updateSettings(partial)` — applies partial updates, switches preset to `'custom'`
 - `applyPreset(id)` — loads a named preset's durations
 
