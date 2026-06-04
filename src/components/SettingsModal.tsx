@@ -142,6 +142,17 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
             {THEMES.find(t => t.id === settings.themeId)?.name}
           </p>
         </div>
+
+        <div className="mt-8 pt-6 border-t border-white/10 text-center">
+          <a
+            href="https://paypal.me/supportmustafaa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white/40 hover:text-white/80 transition-colors text-sm cursor-pointer"
+          >
+            💰 Send a tip
+          </a>
+        </div>
       </div>
     </div>
   )
