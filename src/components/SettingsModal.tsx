@@ -6,26 +6,35 @@ interface SettingsModalProps {
 }
 
 export function SettingsModal({ onClose }: SettingsModalProps) {
-  const { settings, updateSettings, applyPreset } = useSettings()
+  const { settings, updateSettings, applyPreset, setMode } = useSettings()
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-slate-900 rounded-2xl p-8 w-full max-w-md mx-4 border border-white/10 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-[var(--overlay)] backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-[var(--surface-card)] rounded-2xl p-8 w-full max-w-md mx-4 border border-[var(--border)] max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-white">Settings</h2>
-          <button
-            onClick={onClose}
-            className="text-white/40 hover:text-white/80 transition-colors cursor-pointer"
-            aria-label="Close settings"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
+          <h2 className="text-xl font-semibold text-[var(--text-primary)]">Settings</h2>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setMode(settings.mode === 'dark' ? 'light' : 'dark')}
+              className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer text-lg"
+              aria-label="Toggle dark/light mode"
+            >
+              {settings.mode === 'dark' ? '☀️' : '🌙'}
+            </button>
+            <button
+              onClick={onClose}
+              className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+              aria-label="Close settings"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-3">Preset</h3>
+          <h3 className="text-sm font-medium text-[var(--text-tertiary)] uppercase tracking-wider mb-3">Preset</h3>
           <div className="grid grid-cols-2 gap-2">
             {PRESETS.map(preset => (
               <button
@@ -33,8 +42,8 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
                 onClick={() => applyPreset(preset.id)}
                 className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                   settings.presetId === preset.id
-                    ? 'bg-white/20 text-white'
-                    : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80'
+                    ? 'bg-[var(--surface-hover)] text-[var(--text-primary)]'
+                    : 'bg-[var(--surface-active)] text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 {preset.name}
@@ -44,8 +53,8 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
               onClick={() => updateSettings({ presetId: 'custom' })}
               className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                 settings.presetId === 'custom'
-                  ? 'bg-white/20 text-white'
-                  : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white/80'
+                  ? 'bg-[var(--surface-hover)] text-[var(--text-primary)]'
+                  : 'bg-[var(--surface-active)] text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var(--text-primary)]'
               }`}
             >
               Custom
@@ -54,12 +63,12 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
         </div>
 
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-3">Duration</h3>
+          <h3 className="text-sm font-medium text-[var(--text-tertiary)] uppercase tracking-wider mb-3">Duration</h3>
           <div className="space-y-5">
             <div>
               <div className="flex justify-between text-sm mb-2">
-                <span className="text-white/80">Focus</span>
-                <span className="text-white font-medium">{settings.focusDuration} min</span>
+                <span className="text-[var(--text-secondary)]">Focus</span>
+                <span className="text-[var(--text-primary)] font-medium">{settings.focusDuration} min</span>
               </div>
               <input
                 type="range"
@@ -73,8 +82,8 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
             </div>
             <div>
               <div className="flex justify-between text-sm mb-2">
-                <span className="text-white/80">Short Break</span>
-                <span className="text-white font-medium">{settings.shortBreakDuration} min</span>
+                <span className="text-[var(--text-secondary)]">Short Break</span>
+                <span className="text-[var(--text-primary)] font-medium">{settings.shortBreakDuration} min</span>
               </div>
               <input
                 type="range"
@@ -88,8 +97,8 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
             </div>
             <div>
               <div className="flex justify-between text-sm mb-2">
-                <span className="text-white/80">Long Break</span>
-                <span className="text-white font-medium">{settings.longBreakDuration} min</span>
+                <span className="text-[var(--text-secondary)]">Long Break</span>
+                <span className="text-[var(--text-primary)] font-medium">{settings.longBreakDuration} min</span>
               </div>
               <input
                 type="range"
@@ -105,10 +114,10 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
         </div>
 
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-3">Breaks Before Long</h3>
+          <h3 className="text-sm font-medium text-[var(--text-tertiary)] uppercase tracking-wider mb-3">Breaks Before Long</h3>
           <div className="flex justify-between text-sm mb-2">
-            <span className="text-white/80">Short breaks before long break</span>
-            <span className="text-white font-medium">{settings.shortBreaksBeforeLong}</span>
+            <span className="text-[var(--text-secondary)]">Short breaks before long break</span>
+            <span className="text-[var(--text-primary)] font-medium">{settings.shortBreaksBeforeLong}</span>
           </div>
           <input
             type="range"
@@ -122,33 +131,31 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
         </div>
 
         <div>
-          <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-3">Theme</h3>
-          <div className="flex gap-3 flex-wrap">
+          <h3 className="text-sm font-medium text-[var(--text-tertiary)] uppercase tracking-wider mb-3">Theme</h3>
+          <div className="grid grid-cols-3 gap-3">
             {THEMES.map(theme => (
               <button
                 key={theme.id}
                 onClick={() => updateSettings({ themeId: theme.id })}
-                className={`w-14 h-14 rounded-xl border-2 transition-all cursor-pointer ${
+                className={`flex flex-col items-center gap-1 p-3 rounded-xl transition-all cursor-pointer ${
                   settings.themeId === theme.id
-                    ? 'border-white ring-2 ring-white/40 scale-110'
-                    : 'border-white/10 hover:border-white/30'
+                    ? 'bg-[var(--surface-hover)] ring-2 ring-[var(--text-primary)]/40 scale-105'
+                    : 'bg-[var(--surface-active)] hover:bg-[var(--surface)]'
                 }`}
-                style={{ backgroundColor: theme.colors.focus }}
-                title={theme.name}
-              />
+              >
+                <span className="text-2xl">{theme.icon}</span>
+                <span className="text-xs text-[var(--text-secondary)]">{theme.name}</span>
+              </button>
             ))}
           </div>
-          <p className="text-white/40 text-xs mt-3">
-            {THEMES.find(t => t.id === settings.themeId)?.name}
-          </p>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-white/10 text-center">
+        <div className="mt-8 pt-6 border-t border-[var(--border)] text-center">
           <a
             href="https://paypal.me/supportmustafaa"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white/40 hover:text-white/80 transition-colors text-sm cursor-pointer"
+            className="inline-flex items-center gap-2 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors text-sm cursor-pointer"
           >
             💰 Send a tip
           </a>

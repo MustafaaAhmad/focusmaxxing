@@ -7,6 +7,7 @@ interface UseTimerOptions {
   shortBreakDuration: number
   longBreakDuration: number
   shortBreaksBeforeLong: number
+  phaseLabels: Record<Phase, string>
 }
 
 export function useTimer({
@@ -14,6 +15,7 @@ export function useTimer({
   shortBreakDuration,
   longBreakDuration,
   shortBreaksBeforeLong,
+  phaseLabels,
 }: UseTimerOptions) {
   const getDurationForPhase = useCallback(
     (p: Phase): number => {
@@ -103,11 +105,8 @@ export function useTimer({
   useEffect(() => {
     const m = Math.floor(timeRemaining / 60)
     const s = timeRemaining % 60
-    const name = phase === 'focus' ? 'Focus'
-      : phase === 'shortBreak' ? 'Short Break'
-      : 'Long Break'
-    document.title = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} - ${name}`
-  }, [timeRemaining, phase])
+    document.title = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} - ${phaseLabels[phase]}`
+  }, [timeRemaining, phase, phaseLabels])
 
   return { timeRemaining, phase, isRunning, completedSessions, start, pause, reset }
 }

@@ -48,10 +48,42 @@
   }
 }
 
+[data-mode="dark"], :root {
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-tertiary: rgba(255, 255, 255, 0.4);
+  --text-muted: rgba(255, 255, 255, 0.3);
+  --surface: rgba(255, 255, 255, 0.1);
+  --surface-hover: rgba(255, 255, 255, 0.2);
+  --surface-active: rgba(255, 255, 255, 0.05);
+  --surface-card: #1e293b;
+  --border: rgba(255, 255, 255, 0.1);
+  --overlay: rgba(0, 0, 0, 0.6);
+}
+
+[data-mode="light"] {
+  --text-primary: #1a1a2e;
+  --text-secondary: rgba(26, 26, 46, 0.7);
+  --text-tertiary: rgba(26, 26, 46, 0.4);
+  --text-muted: rgba(26, 26, 46, 0.3);
+  --surface: rgba(0, 0, 0, 0.05);
+  --surface-hover: rgba(0, 0, 0, 0.1);
+  --surface-active: rgba(0, 0, 0, 0.02);
+  --surface-card: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --overlay: rgba(0, 0, 0, 0.3);
+}
+
 [data-theme="zen"] {
   --bg-focus: #0f172a;
   --bg-short-break: #064e3b;
   --bg-long-break: #134e4a;
+}
+
+[data-mode="light"][data-theme="zen"] {
+  --bg-focus: #f0f4ff;
+  --bg-short-break: #e8f5e9;
+  --bg-long-break: #e0f2f1;
 }
 
 [data-theme="ocean"] {
@@ -60,10 +92,22 @@
   --bg-long-break: #164e63;
 }
 
+[data-mode="light"][data-theme="ocean"] {
+  --bg-focus: #e8f0fe;
+  --bg-short-break: #d4e4f7;
+  --bg-long-break: #c8e6f0;
+}
+
 [data-theme="sunset"] {
   --bg-focus: #431407;
   --bg-short-break: #881337;
   --bg-long-break: #78350f;
+}
+
+[data-mode="light"][data-theme="sunset"] {
+  --bg-focus: #fef3e2;
+  --bg-short-break: #fce4ec;
+  --bg-long-break: #fff3e0;
 }
 
 [data-theme="forest"] {
@@ -72,8 +116,44 @@
   --bg-long-break: #064e3b;
 }
 
+[data-mode="light"][data-theme="forest"] {
+  --bg-focus: #e8f5e9;
+  --bg-short-break: #f1f8e9;
+  --bg-long-break: #e0f2f1;
+}
+
 [data-theme="midnight"] {
   --bg-focus: #1e1b4b;
   --bg-short-break: #2e1065;
   --bg-long-break: #312e81;
+}
+
+[data-mode="light"][data-theme="midnight"] {
+  --bg-focus: #ede7f6;
+  --bg-short-break: #f3e5f5;
+  --bg-long-break: #e8eaf6;
+}
+
+[data-theme="primitive"] {
+  --bg-focus: #3b1f0b;
+  --bg-short-break: #5c3a21;
+  --bg-long-break: #8b4513;
+}
+
+[data-mode="light"][data-theme="primitive"] {
+  --bg-focus: #fce4d6;
+  --bg-short-break: #efebe9;
+  --bg-long-break: #d7ccc8;
+}
+
+[data-theme="temple"] {
+  --bg-focus: #1a0f0a;
+  --bg-short-break: #7b1f1f;
+  --bg-long-break: #2d5016;
+}
+
+[data-mode="light"][data-theme="temple"] {
+  --bg-focus: #faf0e6;
+  --bg-short-break: #ffebee;
+  --bg-long-break: #e8f5e9;
 }
